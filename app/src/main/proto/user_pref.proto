@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+option java_package = "com.gnua_aruht.weather_compose";
+option java_multiple_files = true;
+
+message UserPref {
+  int32 tempUnit = 1;
+  int32 windSpeedUnit = 2;
+  int32 timeUnit = 3;
+  int32 pressureUnit = 4;
+}
