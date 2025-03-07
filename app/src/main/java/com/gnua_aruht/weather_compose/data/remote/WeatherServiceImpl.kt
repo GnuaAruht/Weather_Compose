@@ -10,6 +10,7 @@ import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.client.statement.HttpResponse
 import javax.inject.Inject
+import com.gnua_aruht.weather_compose.data.utils.API_KEY
 
 
 class WeatherServiceImpl @Inject constructor(private val client : HttpClient) : WeatherService {
@@ -19,7 +20,7 @@ class WeatherServiceImpl @Inject constructor(private val client : HttpClient) : 
             parameter("lat",location.latitude)
             parameter("lon",location.longitude)
             parameter("exclude","minutely,alerts")
-            parameter("appid",ApiConsts.API_KEY)
+            parameter("appid",API_KEY) // your api key
             parameter("units",unit.value)
         }
         return response.body<WeatherResponseDto>()
