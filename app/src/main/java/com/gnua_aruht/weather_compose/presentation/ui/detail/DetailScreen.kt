@@ -8,10 +8,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.gnua_aruht.weather_compose.domain.model.DailyWeather
 
 
 @Composable
-fun DetailScreen(modifier: Modifier = Modifier) {
+fun DetailScreen(
+    weathers: List<DailyWeather>,
+    onNavIconClicked: () -> Unit,
+    modifier: Modifier = Modifier
+) {
 
     Scaffold(modifier = modifier.fillMaxSize()) {
         Text(
