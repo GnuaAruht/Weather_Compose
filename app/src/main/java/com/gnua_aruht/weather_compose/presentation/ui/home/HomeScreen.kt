@@ -12,8 +12,12 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -30,6 +34,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.animateLottieCompositionAsState
+import com.airbnb.lottie.compose.rememberLottieComposition
 import com.gnua_aruht.weather_compose.R
 import com.gnua_aruht.weather_compose.UserPref
 import com.gnua_aruht.weather_compose.data.utils.WeatherConverter
@@ -40,7 +48,6 @@ import com.gnua_aruht.weather_compose.data.utils.selectedWindSpeed
 import com.gnua_aruht.weather_compose.domain.model.DailyWeather
 import com.gnua_aruht.weather_compose.domain.model.ForecastWeather
 import com.gnua_aruht.weather_compose.presentation.ui.components.PullToRefreshLayout
-import java.lang.Exception
 import java.util.Locale
 
 
@@ -56,13 +63,12 @@ fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel()
 ) {
 
-    val state by viewModel.state.collectAsState()
-
     Scaffold(
         modifier = modifier.fillMaxSize(),
         topBar = { HomeAppBar(onMenuClicked = onMenuClicked) },
         content = {
 
+            val state by viewModel.state.collectAsState()
             val contentModifier = Modifier.padding(it)
 
             if (state.data != null) {
@@ -78,7 +84,7 @@ fun HomeScreen(
             } else {
                 if (state.exception != null) {
                     ErrorContent(
-                        exception = state.exception!!,
+                        onRefresh = { viewModel.refreshWeatherData() },
                         modifier = contentModifier
                     )
                 } else {
@@ -198,16 +204,34 @@ fun DataContent(
 
 @Composable
 fun ErrorContent(
-    exception: Exception,
+    onRefresh: () -> Unit,
     modifier: Modifier = Modifier
 ) {
 
-    Text(
-        "Error content",
-        modifier = modifier
-            .fillMaxSize()
-            .wrapContentSize(align = Alignment.Center)
-    )
+    Column(
+        modifier = modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+
+        Icon(
+            Icons.Default.Info,
+            contentDescription = null,
+            tint = Color.Red,
+            modifier = Modifier.size(100.dp)
+        )
+
+        Text(
+            "Failed to load data.",
+            modifier = Modifier.padding(vertical = 12.dp)
+        )
+
+        Button(onClick = { onRefresh() }) {
+            Text("Refresh")
+        }
+
+    }
+
 }
 
 
