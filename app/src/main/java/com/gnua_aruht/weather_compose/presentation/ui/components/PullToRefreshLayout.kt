@@ -81,7 +81,7 @@ fun PullToRefreshContent(
                 LoadingIndicator(Modifier.width(120.dp))
             }
             else {
-                Text("Last updated ....")
+                Text("Pull to refresh")
             }
         }
     }

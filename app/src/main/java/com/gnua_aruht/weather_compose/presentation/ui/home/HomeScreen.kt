@@ -83,7 +83,7 @@ fun HomeScreen(
                     )
                 } else {
                     CircularProgressIndicator(
-                        modifier = Modifier
+                        modifier = contentModifier
                             .fillMaxSize()
                             .wrapContentSize(align = Alignment.Center)
                     )

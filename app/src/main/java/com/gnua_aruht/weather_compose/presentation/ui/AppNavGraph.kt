@@ -30,7 +30,7 @@ fun AppNavGraph(
 
         composable<Route.Home> {
             HomeScreen(
-                onMenuClicked = { },
+                onMenuClicked = { navController.navigate(Route.Settings) },
                 onNext7DaysClicked = { navController.navigate(Route.Detail(it)) }
             )
         }
@@ -44,7 +44,7 @@ fun AppNavGraph(
         }
 
         composable<Route.Settings> {
-            SettingsScreen()
+            SettingsScreen(onNavIconClicked = { navController.navigateUp() })
         }
 
     }
