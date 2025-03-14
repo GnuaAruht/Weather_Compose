@@ -16,7 +16,7 @@
 
 <h3>Screenshots</h3>
 <div style="display: flex; justify-content: space-between;" align = "center">
-    <img src="screenshots/day_home.png" alt="Home Image" style="width: 30%; height: auto;"/>
-    <img src="screenshots/day_settings.png" alt="Detail Image" style="width: 30%; height: auto;"/>
+    <img src="screenshots/home.png" alt="Home Image" style="width: 30%; height: auto;"/>
+    <img src="screenshots/settings.png" alt="Detail Image" style="width: 30%; height: auto;"/>
 </div>
 
